@@ -1,5 +1,6 @@
 import tkinter as tk
 from random import randint, choice, shuffle
+from collections import deque
 
 def assignAreaWeights(z):
     y = 64 - (z * 2)
@@ -100,8 +101,33 @@ for i in weightToButtonMap.keys():
     weight = [weightToButtonMap[i]-1]
     helper(i, grid, weight, color)
 
-print(weightToButtonMap)
-            
+directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+discoveredColoniesQueue = deque()
+visited = set()
+def helper2(start):
+    shuffle(directions)
+    row = start[0]
+    col = start[1]
+    visited.add(start)
+    for i in directions:
+        nRow = row + i[0]
+        nCol = col + i[1]
+        if 0<=nRow<8 and 0<=nCol<8:
+            if valid[nRow][nCol]:
+                return (nRow, nCol)
+            if (nRow, nCol) not in visited:
+                discoveredColoniesQueue.append((nRow, nCol))
+    return helper2(discoveredColoniesQueue.popleft())
+        
+
+for i in range(8):
+    for j in range(8):
+        shuffle(directions)
+        if not valid[i][j]:
+            nearestColony = helper2((i, j))
+            newColor = grid[nearestColony[0]][nearestColony[1]].cget("bg")
+            valid[i][j] = True
+            grid[i][j].config(bg=newColor)
 
 app.mainloop()
 
