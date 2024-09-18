@@ -3,6 +3,7 @@ from tkinter import messagebox
 from random import randint, choice, shuffle
 from collections import deque
 
+# Method to create a random area distribution for colonies on the grid and returning them in an array
 def assignAreaWeights(z):
     y = 64 - (z * 2)
     weights = [2] * z
@@ -15,6 +16,7 @@ def assignAreaWeights(z):
     weights = sorted(weights)
     return weights
 
+# Method to check if a colony has more than one queen 
 def checkColony(r, c):
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
@@ -24,6 +26,7 @@ def checkColony(r, c):
                     break
             break
 
+# Check whether first win condition (every colony has only one queen) has been satisfied
 def firstWinCondition():
     queens = 0
     totalQueens = len(queensColonies)
@@ -33,6 +36,7 @@ def firstWinCondition():
                 queens += 1
     return queens == totalQueens
 
+# Check whether second win condition (no crowns are sharing a column or row) has beem satisfied
 def secondWinCondition():
     rowsSet = set()
     colsSet = set()
@@ -46,6 +50,7 @@ def secondWinCondition():
         return len(rowsSet) == len(colsSet)
     return False
 
+# Check whether third win condition (no queens are touching diagonally) has been satisfied 
 def thirdWinCondition():
     if secondWinCondition():
         for i in queensColonies.values():
@@ -63,7 +68,7 @@ def thirdWinCondition():
     return False
 
 
-
+# Method to display that a colony can no longer have any more queens
 def eliminateColony(r, c):
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
@@ -72,6 +77,7 @@ def eliminateColony(r, c):
                     grid[t[0]][t[1]].config(text="X")
             break
 
+# Method to display that a colony can have a queen placed in it when one is cleared
 def clearColony(r, c):
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
@@ -80,6 +86,7 @@ def clearColony(r, c):
                         grid[t[0]][t[1]].config(text="")
             break
 
+# Method to handle all button events
 def drawX(button, r, c):
     if button['text'] == "X":
         button.config(text="Q")
@@ -130,10 +137,14 @@ def drawX(button, r, c):
     else:
         button.config(text="X")
 
-
+# Initialize a 2D boolean array to show where queens have been placed in the grid and to show available space for helper
+# algorithm to grow colony
 valid = [[False for _ in range(8)] for _ in range(8)]
+
+# List of possible colony colors
 islandColors = ['red', 'green', 'aliceblue', 'yellow', 'cyan', 'deeppink', 'violet', 'orange', 'seagreen1']
 
+# Method to map colonies randomly according to their assigned area
 def helper(start, grid, weight, color):
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     row, col = start
@@ -156,72 +167,7 @@ def helper(start, grid, weight, color):
             continue
     return
 
-app = tk.Tk()
-app.title("Queens")
-app.geometry("700x700")
-
-frame = tk.Frame(app)
-frame.place(rely=0.5, relx=0.5, anchor="center")
-
-grid = []
-for i in range(8):
-    rows = []
-    for j in range(8):
-        newButton = tk.Button(frame, width=5, height=2, bd=1, relief="solid")
-        newButton.grid(row=i, column=j, sticky="nsew")
-        rows.append(newButton)
-    grid.append(rows)
-
-booleanGrid = [[0 for _ in range(8)] for _ in range(8)]  
-
-availableRows = {0, 1, 2, 3, 4, 5, 6, 7}
-availableCols = {0, 1, 2, 3, 4, 5, 6, 7}
-queens = 0
-weightToButtonMap = {}
-queensColonies = {}
-
-while availableCols:
-    rList = list(availableRows)
-    cList = list(availableCols)
-    row = choice(rList)
-    col = choice(cList)
-    if len(rList) == 1:
-        if booleanGrid[row][col]:
-            break
-    if booleanGrid[row][col] == 0:
-        weightToButtonMap[(row, col)] = 0
-        queensColonies[(row, col)] = set()
-        queens += 1
-        booleanGrid[row][col] = 3
-        if row > 0 and col > 0:
-            booleanGrid[row-1][col-1] = 2
-        if row > 0 and col < 7:
-            booleanGrid[row-1][col+1] = 2
-        if row < 7 and col > 0:
-            booleanGrid[row+1][col-1] = 2
-        if row < 7 and col < 7:
-            booleanGrid[row+1][col+1] = 2
-        for j in range(8):
-            booleanGrid[row][j] = 1
-            booleanGrid[j][col] = 1
-        #grid[row][col].config(text="Q")
-        valid[row][col] = True
-        availableRows.remove(row)
-        availableCols.remove(col)
-
-weights = assignAreaWeights(queens)
-for (i, j) in zip(weightToButtonMap.keys(), weights):
-    weightToButtonMap[i] = j
-
-for i in weightToButtonMap.keys():
-    color = choice(islandColors)
-    islandColors.remove(color)
-    weight = [weightToButtonMap[i]-1]
-    helper(i, grid, weight, color)
-
-directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-discoveredColoniesQueue = deque()
-visited = set()
+# Method to add uncolonized blocks to the nearest found colony 
 def helper2(start):
     shuffle(directions)
     row = start[0]
@@ -236,8 +182,111 @@ def helper2(start):
             if (nRow, nCol) not in visited:
                 discoveredColoniesQueue.append((nRow, nCol))
     return helper2(discoveredColoniesQueue.popleft())
-        
 
+# Method to get all blocks that belong to a queen's colony
+def getColony(queen): 
+    colonyColor = grid[queen[0]][queen[1]].cget("bg")
+    for i in range(8):
+        for j in range(8):
+            if grid[i][j].cget("bg") == colonyColor:
+                queensColonies[queen].add((i, j))
+
+app = tk.Tk()
+app.title("Queens")
+app.geometry("700x700")
+
+frame = tk.Frame(app)
+frame.place(rely=0.5, relx=0.5, anchor="center")
+
+
+# Create grid of buttons
+grid = []
+for i in range(8):
+    rows = []
+    for j in range(8):
+        newButton = tk.Button(frame, width=5, height=2, bd=1, relief="solid")
+        newButton.grid(row=i, column=j, sticky="nsew")
+        rows.append(newButton)
+    grid.append(rows)
+
+# Initialize a grid to represent the open blocks available to queens
+placementGrid = [[0 for _ in range(8)] for _ in range(8)]  
+
+# Initialize a set for available rows and columns to place queens
+availableRows = {0, 1, 2, 3, 4, 5, 6, 7}
+availableCols = {0, 1, 2, 3, 4, 5, 6, 7}
+
+# Initialize queens to keep track of the number of queens on the grid
+queens = 0
+
+# Initialize weightToButtonMap to assign colony weights to different queens
+weightToButtonMap = {}
+
+# Initialize queensColonies to hold all blocks that are a part of a queens colony
+queensColonies = {}
+
+while availableCols:
+    # Convert currently available columns and rows into a list
+    rList = list(availableRows)
+    cList = list(availableCols)
+
+    # Get a random row and a random column in the grid 
+    row = choice(rList)
+    col = choice(cList)
+
+    # If the only remaining row-column combination does not fit into the grid, break out of the loop
+    if len(rList) == 1:
+        if placementGrid[row][col]:
+            break
+    
+    # If the row-column combination can allow for queen placement then create a key for its weight
+    # in the weightToButtonMap dict, and a key for its colony in queensColonies dict
+    if placementGrid[row][col] == 0:
+        weightToButtonMap[(row, col)] = 0
+        queensColonies[(row, col)] = set()
+
+        # Add one to queens to get the total number of queens successfully placed
+        queens += 1
+
+        # Change the value of placementGrid[row][col] to 2 to represent the diagonals
+        # touching a queen's block and 1 to represent the queen's designated column and row
+        if row > 0 and col > 0:
+            placementGrid[row-1][col-1] = 2
+        if row > 0 and col < 7:
+            placementGrid[row-1][col+1] = 2
+        if row < 7 and col > 0:
+            placementGrid[row+1][col-1] = 2
+        if row < 7 and col < 7:
+            placementGrid[row+1][col+1] = 2
+        for j in range(8):
+            placementGrid[row][j] = 1
+            placementGrid[j][col] = 1
+        
+        valid[row][col] = True
+
+        # Remove the row-column combination as viable options to place queens
+        availableRows.remove(row)
+        availableCols.remove(col)
+
+# Initialize an array to hold randomly generated area distributions on the grid
+weights = assignAreaWeights(queens)
+
+# Assign each individual queen a weight that corresponds to the area of their colony
+for (i, j) in zip(weightToButtonMap.keys(), weights):
+    weightToButtonMap[i] = j
+
+# Assign each queen a color and map out their colony with a random shape
+for i in weightToButtonMap.keys():
+    color = choice(islandColors)
+    islandColors.remove(color)
+    weight = [weightToButtonMap[i]-1]
+    helper(i, grid, weight, color)
+
+directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+discoveredColoniesQueue = deque()
+visited = set()
+        
+# Add all uncolonized blocks to their nearest found colony
 for i in range(8):
     for j in range(8):
         grid[i][j].config(command=lambda b=grid[i][j], x=i, y=j: drawX(b, x, y))
@@ -247,17 +296,7 @@ for i in range(8):
             newColor = grid[nearestColony[0]][nearestColony[1]].cget("bg")
             valid[i][j] = True
             grid[i][j].config(bg=newColor)
-
-def getColony(queen):
-    colonyColor = grid[queen[0]][queen[1]].cget("bg")
-    for i in range(8):
-        for j in range(8):
-            if grid[i][j].cget("bg") == colonyColor:
-                queensColonies[queen].add((i, j))
             
-# for i in queensColonies.keys():
-#     getColony(i)
-#     print(i, "--->", queensColonies[i], end="\n")
 
 app.mainloop()
 
