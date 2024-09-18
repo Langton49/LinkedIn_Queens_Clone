@@ -68,6 +68,7 @@ def thirdWinCondition():
     return False
 
 
+xGrid = [[0 for _ in range(8)] for _ in range(8)] 
 # Method to display that a colony can no longer have any more queens
 def eliminateColony(r, c):
     for i in range(8):
@@ -75,57 +76,100 @@ def eliminateColony(r, c):
              messagebox.showinfo("Alert", "Queen cannot go there")
              return
         elif i != c:
-            grid[r][i].config(text="x")
+            if grid[r][i]['text'] != "x":
+                grid[r][i].config(text="x")
+            xGrid[r][i] += 1
 
     for i in range(8):
         if i != r and grid[i][c]['text'] == "Q":
             messagebox.showinfo("Alert", "Queen cannot go there")
             return
         elif i != r:
-            grid[i][c].config(text="x")
+            if grid[i][c]['text'] != "x":
+                grid[i][c].config(text="x")
+            xGrid[i][c] += 1
+                
     if (r>0 and c<7 and grid[r-1][c+1]['text'] == "Q") or (r<7 and c<7 and grid[r+1][c+1]['text'] == "Q") or (r>0 and c>0 and grid[r-1][c-1]['text'] == "Q") or (r<7 and c>0 and grid[r+1][c-1]['text'] == "Q"):
             messagebox.showinfo("Alert", "Queen cannot go there")
             return
     else:
         if r>0 and c<7:
-            grid[r-1][c+1].config(text="x")
+            if grid[r-1][c+1]['text'] != "x":
+                grid[r-1][c+1].config(text="x")
+            xGrid[r-1][c+1] += 1
+
         if r<7 and c<7:
-            grid[r+1][c+1].config(text="x")
+            if grid[r+1][c+1]['text'] != "x":
+                grid[r+1][c+1].config(text="x")
+            xGrid[r+1][c+1] += 1
+
         if r>0 and c>0:
-            grid[r-1][c-1].config(text="x")
+            if grid[r-1][c-1]['text'] != "x":
+                grid[r-1][c-1].config(text="x")
+            xGrid[r-1][c-1] += 1
+            
         if r<7 and c>0:
-            grid[r+1][c-1].config(text="x")
+            if grid[r+1][c-1]['text'] != "x":
+                grid[r+1][c-1].config(text="x")
+            xGrid[r+1][c-1] += 1
+
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
             for t in queensColonies[i]:
                 if t != (r, c) and grid[t[0]][t[1]]['text'] != "Q":
-                    grid[t[0]][t[1]].config(text="x")
+                    if grid[t[0]][t[1]]['text'] != "x":
+                        grid[t[0]][t[1]].config(text="x") 
+                    xGrid[t[0]][t[1]] += 1  
             break
+    for i in xGrid:
+        print(i)
+    print()
 
 # Method to display that a colony can have a queen placed in it when one is cleared
 def clearColony(r, c):
     for i in range(8):
-        grid[r][i].config(text="")
-        grid[i][c].config(text="")
+        if xGrid[r][i]:
+            xGrid[r][i] -= 1
+        if xGrid[i][c]:
+            xGrid[i][c] -= 1
+        if not xGrid[r][i]:
+            grid[r][i].config(text="")
+        if not xGrid[i][c]:
+            grid[i][c].config(text="")
+
     if r>0 and c<7:
-        grid[r-1][c+1].config(text="")
+        xGrid[r-1][c+1] -= 1
+        if not xGrid[r-1][c+1]:
+            grid[r-1][c+1].config(text="")
     if r<7 and c<7:
-        grid[r+1][c+1].config(text="")
+        xGrid[r+1][c+1] -= 1
+        if not xGrid[r+1][c+1]:
+            grid[r+1][c+1].config(text="")
     if r>0 and c>0:
-        grid[r-1][c-1].config(text="")
+        xGrid[r-1][c-1] -= 1
+        if not xGrid[r-1][c-1]:
+            grid[r-1][c-1].config(text="")
     if r<7 and c>0:
-        grid[r+1][c-1].config(text="")
+        xGrid[r+1][c-1] -= 1
+        if not xGrid[r+1][c-1]:
+            grid[r+1][c-1].config(text="")
+
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
             for t in queensColonies[i]:
-                    if grid[t[0]][t[1]]['text'] != "Q":
-                        grid[t[0]][t[1]].config(text="")
+                    if t != (r, c):
+                        xGrid[t[0]][t[1]] -= 1
+                        if not xGrid[t[0]][t[1]]:
+                            grid[t[0]][t[1]].config(text="")
             break
+    for i in xGrid:
+        print(i)
+    print()
 
 # Method to handle all button events
 def drawX(button, r, c):
     if button['text'] == "x":
-        button.config(image=icon)
+        button.config(text="Q")
         eliminateColony(r, c)
         checkColony(r, c)
         if thirdWinCondition():
