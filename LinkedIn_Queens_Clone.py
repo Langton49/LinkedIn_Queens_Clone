@@ -75,31 +75,31 @@ def eliminateColony(r, c):
              messagebox.showinfo("Alert", "Queen cannot go there")
              return
         elif i != c:
-            grid[r][i].config(text="X")
+            grid[r][i].config(text="x")
 
     for i in range(8):
         if i != r and grid[i][c]['text'] == "Q":
             messagebox.showinfo("Alert", "Queen cannot go there")
             return
         elif i != r:
-            grid[i][c].config(text="X")
+            grid[i][c].config(text="x")
     if (r>0 and c<7 and grid[r-1][c+1]['text'] == "Q") or (r<7 and c<7 and grid[r+1][c+1]['text'] == "Q") or (r>0 and c>0 and grid[r-1][c-1]['text'] == "Q") or (r<7 and c>0 and grid[r+1][c-1]['text'] == "Q"):
             messagebox.showinfo("Alert", "Queen cannot go there")
             return
     else:
         if r>0 and c<7:
-            grid[r-1][c+1].config(text="X")
+            grid[r-1][c+1].config(text="x")
         if r<7 and c<7:
-            grid[r+1][c+1].config(text="X")
+            grid[r+1][c+1].config(text="x")
         if r>0 and c>0:
-            grid[r-1][c-1].config(text="X")
+            grid[r-1][c-1].config(text="x")
         if r<7 and c>0:
-            grid[r+1][c-1].config(text="X")
+            grid[r+1][c-1].config(text="x")
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
             for t in queensColonies[i]:
                 if t != (r, c) and grid[t[0]][t[1]]['text'] != "Q":
-                    grid[t[0]][t[1]].config(text="X")
+                    grid[t[0]][t[1]].config(text="x")
             break
 
 # Method to display that a colony can have a queen placed in it when one is cleared
@@ -124,8 +124,8 @@ def clearColony(r, c):
 
 # Method to handle all button events
 def drawX(button, r, c):
-    if button['text'] == "X":
-        button.config(text="Q")
+    if button['text'] == "x":
+        button.config(image=icon)
         eliminateColony(r, c)
         checkColony(r, c)
         if thirdWinCondition():
@@ -135,7 +135,7 @@ def drawX(button, r, c):
         button.config(text="")
         clearColony(r, c)
     else:
-        button.config(text="X")
+        button.config(text="x")
 
 # Initialize a 2D boolean array to show where queens have been placed in the grid and to show available space for helper
 # algorithm to grow colony
@@ -192,6 +192,7 @@ def getColony(queen):
                 queensColonies[queen].add((i, j))
 
 app = tk.Tk()
+icon = tk.PhotoImage(file="./crown.png")
 app.title("Queens")
 app.geometry("700x700")
 
