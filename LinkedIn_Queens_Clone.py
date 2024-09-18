@@ -70,6 +70,31 @@ def thirdWinCondition():
 
 # Method to display that a colony can no longer have any more queens
 def eliminateColony(r, c):
+    for i in range(8):
+        if i != c and grid[r][i]['text'] == "Q":
+             messagebox.showinfo("Alert", "Queen cannot go there")
+             return
+        elif i != c:
+            grid[r][i].config(text="X")
+
+    for i in range(8):
+        if i != r and grid[i][c]['text'] == "Q":
+            messagebox.showinfo("Alert", "Queen cannot go there")
+            return
+        elif i != r:
+            grid[i][c].config(text="X")
+    if (r>0 and c<7 and grid[r-1][c+1]['text'] == "Q") or (r<7 and c<7 and grid[r+1][c+1]['text'] == "Q") or (r>0 and c>0 and grid[r-1][c-1]['text'] == "Q") or (r<7 and c>0 and grid[r+1][c-1]['text'] == "Q"):
+            messagebox.showinfo("Alert", "Queen cannot go there")
+            return
+    else:
+        if r>0 and c<7:
+            grid[r-1][c+1].config(text="X")
+        if r<7 and c<7:
+            grid[r+1][c+1].config(text="X")
+        if r>0 and c>0:
+            grid[r-1][c-1].config(text="X")
+        if r<7 and c>0:
+            grid[r+1][c-1].config(text="X")
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
             for t in queensColonies[i]:
@@ -79,6 +104,17 @@ def eliminateColony(r, c):
 
 # Method to display that a colony can have a queen placed in it when one is cleared
 def clearColony(r, c):
+    for i in range(8):
+        grid[r][i].config(text="")
+        grid[i][c].config(text="")
+    if r>0 and c<7:
+        grid[r-1][c+1].config(text="")
+    if r<7 and c<7:
+        grid[r+1][c+1].config(text="")
+    if r>0 and c>0:
+        grid[r-1][c-1].config(text="")
+    if r<7 and c>0:
+        grid[r+1][c-1].config(text="")
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
             for t in queensColonies[i]:
@@ -91,48 +127,12 @@ def drawX(button, r, c):
     if button['text'] == "X":
         button.config(text="Q")
         eliminateColony(r, c)
-        for i in range(8):
-            if i != c and grid[r][i]['text'] == "Q":
-                messagebox.showinfo("Alert", "Queen cannot go there")
-                return
-            elif i != c:
-                grid[r][i].config(text="X")
-        for i in range(8):
-            if i != r and grid[i][c]['text'] == "Q":
-                messagebox.showinfo("Alert", "Queen cannot go there")
-                return
-            elif i != r:
-                grid[i][c].config(text="X")
-        if (r>0 and c<7 and grid[r-1][c+1]['text'] == "Q") or (r<7 and c<7 and grid[r+1][c+1]['text'] == "Q") or (r>0 and c>0 and grid[r-1][c-1]['text'] == "Q") or (r<7 and c>0 and grid[r+1][c-1]['text'] == "Q"):
-            messagebox.showinfo("Alert", "Queen cannot go there")
-            return
-        else:
-            if r>0 and c<7:
-                grid[r-1][c+1].config(text="X")
-            if r<7 and c<7:
-                grid[r+1][c+1].config(text="X")
-            if r>0 and c>0:
-                grid[r-1][c-1].config(text="X")
-            if r<7 and c>0:
-                grid[r+1][c-1].config(text="X")
         checkColony(r, c)
         if thirdWinCondition():
             messagebox.showinfo("Congratulations", "You have won!")
             return
-        
     elif button['text'] == "Q":
         button.config(text="")
-        for i in range(8):
-            grid[r][i].config(text="")
-            grid[i][c].config(text="")
-        if r>0 and c<7:
-            grid[r-1][c+1].config(text="")
-        if r<7 and c<7:
-            grid[r+1][c+1].config(text="")
-        if r>0 and c>0:
-            grid[r-1][c-1].config(text="")
-        if r<7 and c>0:
-            grid[r+1][c-1].config(text="")
         clearColony(r, c)
     else:
         button.config(text="X")
@@ -286,7 +286,7 @@ directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 discoveredColoniesQueue = deque()
 visited = set()
         
-# Add all uncolonized blocks to their nearest found colony
+# Add all uncolonized blocks to the nearest found colony
 for i in range(8):
     for j in range(8):
         grid[i][j].config(command=lambda b=grid[i][j], x=i, y=j: drawX(b, x, y))
@@ -296,6 +296,10 @@ for i in range(8):
             newColor = grid[nearestColony[0]][nearestColony[1]].cget("bg")
             valid[i][j] = True
             grid[i][j].config(bg=newColor)
+
+for i in queensColonies.keys():
+    getColony(i)
+
             
 
 app.mainloop()
