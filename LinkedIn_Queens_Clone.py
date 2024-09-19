@@ -21,7 +21,7 @@ def checkColony(r, c):
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
             for t in queensColonies[i]:
-                if t != (r, c) and grid[t[0]][t[1]]['text'] == "Q":
+                if t != (r, c) and placedQueen[t[0]][t[1]]:
                     messagebox.showinfo("Alert", "There is already a queen in this colony!")
                     break
             break
@@ -32,7 +32,7 @@ def firstWinCondition():
     totalQueens = len(queensColonies)
     for i in queensColonies.values():
         for t in i:
-            if grid[t[0]][t[1]]['text'] == "Q":
+            if placedQueen[t[0]][t[1]]:
                 queens += 1
     return queens == totalQueens
 
@@ -43,7 +43,7 @@ def secondWinCondition():
     if firstWinCondition():
         for i in queensColonies.values():
             for t in i:
-                if grid[t[0]][t[1]]['text'] == "Q":
+                if placedQueen[t[0]][t[1]]:
                     rowsSet.add(t[0])
                     colsSet.add(t[1])
         
@@ -55,14 +55,14 @@ def thirdWinCondition():
     if secondWinCondition():
         for i in queensColonies.values():
             for t in i:
-                if grid[t[0]][t[1]]['text'] == "Q":
-                    if t[0]<7 and t[1]<7 and grid[t[0]+1][t[1]+1] == "Q":
+                if placedQueen[t[0]][t[1]]:
+                    if t[0]<7 and t[1]<7 and placedQueen[t[0]+1][t[1]+1]:
                         return False
-                    if t[0]<7 and t[1]>0 and grid[t[0]+1][t[1]-1] == "Q":
+                    if t[0]<7 and t[1]>0 and placedQueen[t[0]+1][t[1]-1]:
                         return False
-                    if t[0]>0 and t[1]<7 and grid[t[0]-1][t[1]+1] == "Q":
+                    if t[0]>0 and t[1]<7 and placedQueen[t[0]-1][t[1]+1]:
                         return False
-                    if t[0]>0 and t[1]>0 and grid[t[0]-1][t[1]-1] == "Q":
+                    if t[0]>0 and t[1]>0 and placedQueen[t[0]-1][t[1]-1]:
                         return False
         return True
     return False
@@ -72,7 +72,7 @@ xGrid = [[0 for _ in range(8)] for _ in range(8)]
 # Method to display that a colony can no longer have any more queens
 def eliminateColony(r, c):
     for i in range(8):
-        if i != c and grid[r][i]['text'] == "Q":
+        if i != c and placedQueen[r][i]:
              messagebox.showinfo("Alert", "Queen cannot go there")
              return
         elif i != c:
@@ -81,7 +81,7 @@ def eliminateColony(r, c):
             xGrid[r][i] += 1
 
     for i in range(8):
-        if i != r and grid[i][c]['text'] == "Q":
+        if i != r and placedQueen[i][c]:
             messagebox.showinfo("Alert", "Queen cannot go there")
             return
         elif i != r:
@@ -89,7 +89,7 @@ def eliminateColony(r, c):
                 grid[i][c].config(text="x")
             xGrid[i][c] += 1
                 
-    if (r>0 and c<7 and grid[r-1][c+1]['text'] == "Q") or (r<7 and c<7 and grid[r+1][c+1]['text'] == "Q") or (r>0 and c>0 and grid[r-1][c-1]['text'] == "Q") or (r<7 and c>0 and grid[r+1][c-1]['text'] == "Q"):
+    if (r>0 and c<7 and placedQueen[r-1][c+1]) or (r<7 and c<7 and placedQueen[r+1][c+1]) or (r>0 and c>0 and placedQueen[r-1][c-1]) or (r<7 and c>0 and placedQueen[r+1][c-1]):
             messagebox.showinfo("Alert", "Queen cannot go there")
             return
     else:
@@ -116,14 +116,11 @@ def eliminateColony(r, c):
     for i in queensColonies.keys():
         if (r, c) in queensColonies[i]:
             for t in queensColonies[i]:
-                if t != (r, c) and grid[t[0]][t[1]]['text'] != "Q":
+                if t != (r, c) and placedQueen[t[0]][t[1]]:
                     if grid[t[0]][t[1]]['text'] != "x":
                         grid[t[0]][t[1]].config(text="x") 
                     xGrid[t[0]][t[1]] += 1  
             break
-    for i in xGrid:
-        print(i)
-    print()
 
 # Method to display that a colony can have a queen placed in it when one is cleared
 def clearColony(r, c):
@@ -162,24 +159,26 @@ def clearColony(r, c):
                         if not xGrid[t[0]][t[1]]:
                             grid[t[0]][t[1]].config(text="")
             break
-    for i in xGrid:
-        print(i)
-    print()
 
+placedQueen = [[False for _ in range(8)] for _ in range(8)]
 # Method to handle all button events
 def drawX(button, r, c):
-    if button['text'] == "x":
-        button.config(text="Q")
+    if button['text'] == "x" and not placedQueen[r][c]:
+        button.config(image=icon)
+        placedQueen[r][c] = True
         eliminateColony(r, c)
         checkColony(r, c)
         if thirdWinCondition():
             messagebox.showinfo("Congratulations", "You have won!")
             return
-    elif button['text'] == "Q":
-        button.config(text="")
+    elif placedQueen[r][c]:
+        button.config(image='', text='')
+        placedQueen[r][c] = False
         clearColony(r, c)
     else:
         button.config(text="x")
+        xGrid[r][c] += 1
+    
 
 # Initialize a 2D boolean array to show where queens have been placed in the grid and to show available space for helper
 # algorithm to grow colony
@@ -282,7 +281,13 @@ while availableCols:
     # If the only remaining row-column combination does not fit into the grid, break out of the loop
     if len(rList) == 1:
         if placementGrid[row][col]:
-            break
+            weightToButtonMap.clear()
+            queensColonies.clear()
+            queens = 0
+            placementGrid = [[0 for _ in range(8)] for _ in range(8)]
+            valid = [[False for _ in range(8)] for _ in range(8)]
+            availableRows = {0, 1, 2, 3, 4, 5, 6, 7}
+            availableCols = {0, 1, 2, 3, 4, 5, 6, 7}
     
     # If the row-column combination can allow for queen placement then create a key for its weight
     # in the weightToButtonMap dict, and a key for its colony in queensColonies dict
@@ -346,6 +351,4 @@ for i in queensColonies.keys():
     getColony(i)
 
             
-
 app.mainloop()
-
