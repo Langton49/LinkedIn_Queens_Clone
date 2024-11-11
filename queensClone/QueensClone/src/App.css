@@ -1,0 +1,27 @@
+body{
+    overflow: hidden;
+}
+
+#game{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#board{
+    position: absolute;
+    display: grid;
+    height: 400px;
+    width: 400px;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+#board span{
+    background-color: aquamarine;
+    border: 3px solid black;
+    height: 100%;
+    width: 100%;
+}
