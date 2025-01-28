@@ -3,7 +3,7 @@
 ## Table of Contents 📑
 1. [Overview](#overview)
 2. [Why I Built This](#why-i-built-this)
-3. [How It Works](#how-it-works)
+3. [How I Made It](#how-i-made-it)
    1. [Technology Stack](#technology-stack)
    2. [Development Approach](#development-approach)
       - [Generating Unique Colony Shapes](#generating-unique-colony-shapes)
