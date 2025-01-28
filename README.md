@@ -4,7 +4,8 @@ One of my favorite parts about LinkedIn is the daily in-stream puzzle games that
 before I do anything else and my favorite of all of these games is Queens. In Queens, you have to place queens into different areas of a square with the following rules.
 - There should be one queen in each colored area inside a square.
 - There cannot be two queens in the same row or column.
-- The queens may not touch each other diagonally. The square can contain an arbitrary number of colored areas so there can be any number of queens per puzzle. The puzzle is never the same and the shapes of each area is always different from one puzzle to the next.\
+- The queens may not touch each other diagonally.
+- The square can contain an arbitrary number of colored areas so there can be any number of queens per puzzle. The puzzle is never the same and the shapes of each area is always different from one puzzle to the next.\
 \
 __📼 If you've never played it here is a short clip:__
 [alt]()
