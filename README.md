@@ -2,8 +2,7 @@
 
 ## Table of Contents 📑
 1. [Overview](##overview)
-2. [Why I Built This](#why-i-built-this)
-3. [How I Made It](#how-i-made-it)
+2. [How I Made It](#how-i-made-it)
    1. [Technology Stack](#technology-stack)
    2. [Development Approach](#development-approach)
       - [Generating Unique Colony Shapes](#generating-unique-colony-shapes)
@@ -33,7 +32,7 @@ GIF Made With: [Free Convert](https://www.freeconvert.com/)
 As I played, I became curious about how LinkedIn might generate fresh puzzles daily.My hypothesis: LinkedIn uses procedural generation to create each puzzle. I reached out to some
  engineers at LinkedIn but they never got back to me. Unable to confirm this, I decided to test my theory by building my own version of the game. This project is my attempt to recreate the puzzle logic and design a game where players can interact with dynamically generated grids.
  
-## How I made it 🔨
+## How I made it 🔨 <a name="how-i-made-it">
 ### Technology Stack
 - Python (version 3.12.4)
 - Tkinter (version 8.6)
