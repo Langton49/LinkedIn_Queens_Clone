@@ -71,6 +71,7 @@ Ensure you are in the source folder's directory.
 __🎞 DEMO:__\
 \
 ![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-57-38.gif "An Example of a LinkedIn Queens Puzzle")
+
 GIF Made With: [Free Convert](https://www.freeconvert.com/)
 
 ## Contributing
