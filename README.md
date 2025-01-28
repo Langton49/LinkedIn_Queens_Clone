@@ -1,5 +1,5 @@
 # LinkedIn Queens Clone 👑
-## Overview
+## Overview 📃
 One of my favorite parts about LinkedIn is the daily in-stream puzzle games that were added back in May 2024. I wake up every morning and keep my streak up 
 before I do anything else and my favorite of all of these games is Queens. In Queens, you have to place queens into different areas of a square with the following rules.
 
@@ -19,8 +19,8 @@ GIF Made With: [Free Convert](https://www.freeconvert.com/)
 One day as I was playing, I wondered how LinkedIn managed to generate different puzzles everyday. My thought was it may be a complex algorithm that proceduarally generates each puzzle day after day. I asked some
  employees at LinkedIn but they never got back to me so I decided to try to prove that that was how they were doing it by making my own implementation. 
 
-## How I made it
-### Technology
+## How I made it 🔨
+### Technology 
 - Python (version 3.12.4)
 - Tkinter (version 8.6)
 
@@ -50,7 +50,7 @@ To make the UI responsive with user actions, I used an 8x8 integer matrix to kee
 #### Everything Else
 Once the main game components were achieved I went ahead and coded other parts of the program, such as win conditions, helper functions, and a button to reveal a queen on the gameboard.
 
-## How To Run
+## How To Run 🤷‍♂️
 1. Clone this repo:
 ```bash
 git clone https://github.com/Langton49/LinkedIn_Queens_Clone.git
@@ -74,10 +74,10 @@ __🎞 DEMO:__\
 
 GIF Made With: [Free Convert](https://www.freeconvert.com/)
 
-## Contributing
+## Contributing 🤝
 Because software development is an ongoing and collaborative process, contributions are welcome. Simply create a branch, commit your changes, push to the branch and open a pull request.
 
-## Contact
+## Contact ✉
 __Author:__ Munashe Mukweya\
 __Email:__ munashemukweya2022@gmail.com\
 __GitHub:__ https://github.com/Langton49
