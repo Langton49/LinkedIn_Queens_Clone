@@ -71,7 +71,7 @@ Ensure you are in the source folder's directory.
 __🎞 DEMO:__\
 \
 ![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-57-38.gif "An Example of a LinkedIn Queens Puzzle")
-
+GIF Made With: [Free Convert](https://www.freeconvert.com/)
 
 ## Contributing
 Because software development is an ongoing and collaborative process, contributions are welcome. Simply create a branch, commit your changes, push to the branch and open a pull request.
