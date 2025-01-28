@@ -12,6 +12,8 @@ The square can contain an arbitrary number of colored areas so there can be any 
 __📼 If you've never played it here is a short clip:__
 ![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-49-29.gif "An Example of a LinkedIn Queens Puzzle")
 
+GIF Made With: [Free Convert](https://www.freeconvert.com/)
+
 ### Why I made this
 One day as I was playing, I wondered how LinkedIn managed to generate different puzzles everyday. My thought was it may be a complex algorithm that proceduarally generates each puzzle day after day. I asked some
  employees at LinkedIn but they never got back to me so I decided to try to prove that that was how they were doing it by making my own implementation. 
