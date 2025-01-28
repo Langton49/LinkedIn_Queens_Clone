@@ -1,4 +1,19 @@
 # LinkedIn Queens Clone 👑
+
+## Table of Contents 📑
+1. [Overview](#overview)
+2. [Why I Built This](#why-i-built-this)
+3. [How It Works](#how-it-works)
+   1. [Technology Stack](#technology-stack)
+   2. [Development Approach](#development-approach)
+      - [Generating Unique Colony Shapes](#generating-unique-colony-shapes)
+      - [Assigning Colonies to Queens](#assigning-colonies-to-queens)
+      - [Making the Game Interactive](#making-the-game-interactive)
+      - [Additional Features](#additional-features)
+4. [How To Run](#how-to-run)
+5. [Contributing](#contributing)
+6. [Contact](#contact)
+
 ## Overview 📃
 One of my favorite parts about LinkedIn is the daily in-stream puzzle games that were introduced back in May 2024. My favorite of all of these games is Queens. In Queens, you have to place queens into different areas of a square with the following rules.
 
