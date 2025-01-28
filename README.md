@@ -47,7 +47,7 @@ from the queen, to every button that is apart of its colony added according to t
 To make the UI responsive with user actions, I used an 8x8 integer matrix to keep track of where the user had performed specific actions. Actions include: placing a queen, eliminating a block by placing a cross and removing a queen. Each user action would change the value of different buttons depending on what the user does. For example, when a user places a queen by double clicking, the colony into which that queen is place is 'eliminated' (crosses are placed on all buttons in the colony). Internally, there is a check to see which colony the queen was placed and to add 1 to the integer matrix to all numbers with the same assigned coordinates.
 
 #### Everything Else
-Once the main game components were achieved I went ahead and coded other parts of the program, such as win conditions, helper functions, and other things.
+Once the main game components were achieved I went ahead and coded other parts of the program, such as win conditions, helper functions, and a button to reveal a queen on the gameboard.
 
 ## How To Run
 1. Clone this repo:
@@ -68,7 +68,7 @@ Ensure you are in the source folder's directory.
 \
 
 __🎞 DEMO:__\
-![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-49-29.gif "An Example of a LinkedIn Queens Puzzle")
+![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-57-38.gif "An Example of a LinkedIn Queens Puzzle")
 
 
 ## Contributing
