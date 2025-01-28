@@ -9,7 +9,8 @@ before I do anything else and my favorite of all of these games is Queens. In Qu
 
 The square can contain an arbitrary number of colored areas so there can be any number of queens per puzzle. The puzzle is never the same and the shapes of each area is always different from one puzzle to the next.\
 \
-__📼 If you've never played it here is a short clip:__
+__📼 If you've never played it here is a short clip:__\
+\
 ![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-49-29.gif "An Example of a LinkedIn Queens Puzzle")
 
 GIF Made With: [Free Convert](https://www.freeconvert.com/)
@@ -64,10 +65,11 @@ OR
 python3 LinkedIn_Queens_Clone.py
 ```
 Ensure you are in the source folder's directory.
-4. You should now be able to see the game window and play the game.\
+4. You should now be able to see the game window and play the game.
 \
 
 __🎞 DEMO:__\
+\
 ![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-57-38.gif "An Example of a LinkedIn Queens Puzzle")
 
 
