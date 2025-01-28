@@ -51,6 +51,14 @@ To make the UI responsive with user actions, I used an 8x8 integer matrix to kee
 Once the main game components were achieved I went ahead and coded other parts of the program, such as win conditions, helper functions, and a button to reveal a queen on the gameboard.
 
 ## How To Run 🤷‍♂️
+### Requirements:
+1. If you have not already, [install Python](https://www.python.org/downloads/) (3.12.4 or later)
+2. If you have not already, install tkinter (8.6 or later)
+```console
+pip install tkinter
+```
+
+### Running The Program
 1. Clone this repo:
 ```bash
 git clone https://github.com/Langton49/LinkedIn_Queens_Clone.git
@@ -66,7 +74,7 @@ python3 LinkedIn_Queens_Clone.py
 ```
 Ensure you are in the source folder's directory.
 4. You should now be able to see the game window and play the game.
-\
+
 
 __🎞 DEMO:__\
 \
