@@ -6,7 +6,7 @@ before I do anything else and my favorite of all of these games is Queens. In Qu
 - There cannot be two queens in the same row or column.
 - The queens may not touch each other diagonally.
 The square can contain an arbitrary number of colored areas so there can be any number of queens per puzzle. The puzzle is never the same and the shapes of each area is always different from
-one puzzle to the next.
+one puzzle to the next.\
 __📼 If you've never played it here is a short clip:__
 [alt]()
 
