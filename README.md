@@ -54,7 +54,7 @@ Once the main game components were achieved I went ahead and coded other parts o
 ### Requirements:
 1. If you have not already, [install Python](https://www.python.org/downloads/) (3.12.4 or later)
 2. If you have not already, install tkinter (8.6 or later)
-```console
+```bash
 pip install tkinter
 ```
 
@@ -65,11 +65,11 @@ git clone https://github.com/Langton49/LinkedIn_Queens_Clone.git
 ```
 2. Navigate to the `source` folder.
 3. Open a terminal in that directory and type the following command:
-```console
+```bash
 python LinkedIn_Queens_Clone.py
 ```
 OR
-```console
+```bash
 python3 LinkedIn_Queens_Clone.py
 ```
 Ensure you are in the source folder's directory.
