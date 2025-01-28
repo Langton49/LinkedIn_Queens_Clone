@@ -10,7 +10,7 @@ before I do anything else and my favorite of all of these games is Queens. In Qu
 The square can contain an arbitrary number of colored areas so there can be any number of queens per puzzle. The puzzle is never the same and the shapes of each area is always different from one puzzle to the next.\
 \
 __📼 If you've never played it here is a short clip:__
-[alt](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-49-29.gif "An Example of a LinkedIn Queens Puzzle")
+![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-49-29.gif "An Example of a LinkedIn Queens Puzzle")
 
 ### Why I made this
 One day as I was playing, I wondered how LinkedIn managed to generate different puzzles everyday. My thought was it may be a complex algorithm that proceduarally generates each puzzle day after day. I asked some
