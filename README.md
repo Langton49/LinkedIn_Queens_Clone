@@ -9,7 +9,7 @@
       - [Assigning Colonies to Queens](#assigning-colonies-to-queens)
       - [Making the Game Interactive](#making-the-game-interactive)
       - [Additional Features](#additional-features)
-4. [How To Run](#how-to-run)
+4. [How To Run It](#how-to-run-it)
 5. [Contributing](#contributing)
 6. [Contact](#contact)
 
