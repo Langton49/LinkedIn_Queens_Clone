@@ -1,7 +1,7 @@
 # LinkedIn Queens Clone 👑
 
 ## Table of Contents 📑
-1. [Overview](##overview)
+1. [Overview](#overview)
 2. [How I Made It](#how-i-made-it)
    1. [Technology Stack](#technology-stack)
    2. [Development Approach](#development-approach)
