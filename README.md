@@ -63,8 +63,8 @@ Once the main game components were achieved I went ahead and added other parts o
 
 ## How To Run It🤷‍♂️ <a name="how-to-run-it">
 ### Requirements:
-1. If you have not already, [install Python](https://www.python.org/downloads/) (3.12.4 or later)
-2. If you have not already, install tkinter (8.6 or later)
+1. If you have not already, [install Python](https://www.python.org/downloads/) (3.7 or later)
+2. If you have not already, install tkinter (any version)
 ```bash
 pip install tkinter
 ```
