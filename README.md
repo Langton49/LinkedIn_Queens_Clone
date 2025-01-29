@@ -87,7 +87,7 @@ Ensure you are in the source folder's directory.
 4. You should now be able to see the game window and play the game.
 
 
-## 🎞DEMO <a name="demo">
+## DEMO 🎞 <a name="demo">
 \
 ![alt text](https://github.com/Langton49/LinkedIn_Queens_Clone/blob/main/Assets/14-57-38.gif "An Example of a LinkedIn Queens Puzzle")
 
